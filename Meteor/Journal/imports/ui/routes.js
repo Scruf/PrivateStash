@@ -1,0 +1,12 @@
+Router.configure({
+	layoutTemplate:'index'
+})
+Router.route('/',function(){
+	this.render('main')
+})
+Router.route('/egor',function(){
+	this.render('main_window')
+})
+Router.route(':_id/entry',function(){
+	this.render("entry");
+})

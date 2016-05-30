@@ -1,0 +1,73 @@
+<template name="index">
+	{{>yield}}
+</template>
+<!--maing navigation template-->
+<template name="main">
+
+	<div class="container">
+		{{#if currentUser}}
+			<p>Welcome back Egor</p>
+				{{>main_window}}
+		{{else}}
+			{{>register}}
+			{{>login}}	
+		{{/if}}
+	</div>
+</template>
+
+
+<template name="register">
+	<div class="container">
+		<form class="register_form">
+			<label>Email:</label>
+				<input class="login_email form-control" type="email" name="login_email">
+				<br>
+				<br>
+				<label>Password:</label>
+				<input type="password" class="login_password form-control" name="login_password">
+				<br>
+				<br>
+				<label>Cell:</label>
+				<input type="text" class="login_cell form-control" name="cell_phone">
+				<br>
+				<br>
+				<button type="sybmit" class="btn btn-success">Submit</button> 
+		</form>
+	</div>
+</template>
+
+<template name="login">
+	<div class="container">
+		<form class="login_form">
+				<label>Email:</label>
+				<input class="email" type="email" name="email">
+				<br>
+				<label>Password</label>
+				<input class="passwrod" type="password" name="password">
+				<br>
+				<button type="sybmit" class="btn btn-success" value="Sybmit"> Sybmit</button>
+			</form>
+	</div>
+	
+</template>
+<template name="main_window">
+	<div class="container">
+	 	<ul class="nav nav-pills">
+  			<li><a href="{{currentUser._id}}/entry">Entry  </a></li>
+  			<li><a href="#news">List of Enteries</a></li>
+  			<li><a href="#contact">Enter Code Sniper</a></li>
+  			<li><a href="#about">List of Code Snipets</a></li>
+		</ul>
+    </div>
+</template>
+<template name="entry">
+	<div class="container">
+		<textarea type="text" class="Entry">
+			
+		</textarea>
+		<br>
+		<button class="btn btn-success send">Send</button>
+
+	</div>
+	
+</template>
