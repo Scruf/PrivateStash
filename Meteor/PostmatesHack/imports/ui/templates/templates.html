@@ -1,0 +1,62 @@
+<template name="main">
+     <link rel="stylesheet" type="text/css" href="https://js.arcgis.com/3.16/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="https://js.arcgis.com/3.16/dijit/themes/claro/claro.css">
+	       <div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'"></div>
+    <script>
+   
+ navigator.geolocation.getCurrentPosition(success, error);
+    function error(err){
+      console.log(err);
+    }
+    function success(pos) {
+      var crd = pos.coords;
+
+
+      var latitude = crd.latitude;
+      var longitude = crd.longitude;
+
+      require(["esri/urlUtils",
+        "esri/config",
+        "esri/map",
+        "esri/graphic",
+        "esri/geometry/Point",
+        "esri/tasks/RouteTask",
+        "esri/tasks/RouteParameters",
+
+        "esri/IdentityManager",
+
+        "esri/tasks/FeatureSet",
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/symbols/SimpleLineSymbol",
+
+        "esri/Color",
+        "dojo/_base/array",
+        "dojo/on",
+        "dojo/dom",
+        "dijit/registry",
+        "esri/arcgis/OAuthInfo",
+        "esri/IdentityManager",
+        "dijit/layout/BorderContainer",
+        "dijit/layout/ContentPane",
+        "dijit/form/HorizontalSlider",
+        "dijit/form/HorizontalRuleLabels"], function (urlUtils, esriConfig, Map, Graphic, Point, RouteTask, RouteParameters, IdentityManager,
+                                                      FeatureSet, SimpleMarkerSymbol, SimpleLineSymbol,
+                                                      Color, array, on, dom, registry, OAuthInfo, esriId) {
+
+        esriConfig.defaults.io.corsEnabledServers.push("https://route.arcgis.com");
+        //   urlUtils.addProxyRule({
+        //   urlPrefix: "route.arcgis.com",  
+        //   proxyUrl: "/sproxy/"
+        // });
+        var map = new Map("map", {
+          basemap: "streets",
+          center: [longitude, latitude],
+          zoom: 16
+        });
+    });
+}
+    </script>
+           <script src="https://js.arcgis.com/3.16/"></script>
+
+   
+</template>
