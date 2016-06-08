@@ -1,22 +1,33 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-
+import {Data} from '../api/timestamp.js';
+import { HTTP } from 'meteor/http'
 import './main.html';
+ 
+Template.body.events({
+	'click .save'(event){
+		event.preventDefault()
+		function success(pos){
+			console.log(new Date());
+			HTTP.call('POST','https://api.mlab.com/api/1/databases/movies/collections/DeliveryLoc?apiKey=mS1eukopD5Ulis8iu5qjc7ykx0YpsUYb',{
+				data:{
+					"time": new Date,
+					"lat":pos.coords.latitude,
+					"long":pos.coords.longitude
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
+				}
+			},(err,response)=>{
+				if(err)
+					console.log(err.reason);
+				else
+					console.log(response);
+			})
+			console.log(pos);
+		}
+		function error(err){
+			console.log(err);
+		}
+		navigator.geolocation.getCurrentPosition(success,error);
+	}
+})
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
