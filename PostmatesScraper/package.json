@@ -1,0 +1,17 @@
+{
+  "name": "postmates_scraper",
+  "version": "1.0.0",
+  "description": "Postmates restaraunt scraper",
+  "main": "scrape.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Egor Kozitski",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^0.20.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.20",
+    "yelp": "^1.0.1"
+  }
+}
