@@ -30,7 +30,7 @@ Meteor.startup(function() {
   			}
     		return getLocation();
         }
-      
+    
   
 });
 
