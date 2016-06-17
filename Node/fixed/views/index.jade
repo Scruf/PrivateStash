@@ -1,0 +1,28 @@
+extends layout
+
+block content
+ 
+  h1= title
+  p Nope to #{title}
+
+  div.container
+
+   div.jumbotron
+    row-12
+      col-sm-4
+        a(class='btn btn-success button', href='#') View Projects
+      col-sm-4
+        a(class='btn btn-success button', href='/project') New Project
+    h1.earned $0
+     br
+     div.row
+      div.col-sm-6
+       input.form-cotrol.input-lg.sallary(
+       	 type="text"
+       	 class="money"
+       	 name="sallary"
+       	 style="width:70%")
+      div.col-sm-4 
+       button.calculate.btn.btn-success Save
+       
+

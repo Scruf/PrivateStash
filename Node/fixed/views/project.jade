@@ -1,0 +1,31 @@
+extends layout
+
+
+block project
+ 
+  
+  div.container
+
+   div.jumbotron
+    form.project_name
+       label Project Name
+       input(
+         type="text"
+         class="name"
+         name="name"
+         style="width:50%"
+       )
+       br
+       label Prject price
+       input(
+         type="text"
+         class="project_price"
+         name="project_price"
+         style="width:50%"
+       )
+       br
+       textarea(
+        class="project_details"
+       )
+       br
+       button(class="save btn btn-success submit") Save
