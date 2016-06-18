@@ -11,7 +11,14 @@ db.on('error',console.error.bind(console, 'connection error:'));
 router.get('/', function(req, res, next) {
   res.render('project', { title: 'My Purse' });
 });
-
+router.get('/details',function(req,res,next){
+	Project.find(function(err,data){
+		if(err)
+			res.send(err);
+		else
+			res.send(data);
+	})
+})
 router.post('/',function(req,res,next){
 	var name = req.body['name'],
 		price = req.body['price'],
