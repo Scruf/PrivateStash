@@ -19,13 +19,15 @@ $.ajax({
 			var Ulproject = this.props.data.map(function(project){
 
 				return (
-					<LiContainer project_name={project.project_name} key={project._id}>{project.project_name}</LiContainer>
+					<LiContainer project_name={project.project_name} key={project._id}>{project.project_name}
+						Wooo
+					</LiContainer>
 				);
 			});
 			return (
-				<div className="foo">
+				<ul className="ul_header">
 					{Ulproject}
-				</div>
+				</ul>
 			)
 			
 		}
@@ -33,7 +35,8 @@ $.ajax({
 	var LiContainer = React.createClass({
 		render: function(){
 			return (
-				<li>{this.props.project_name}</li>
+				<li className="project_container">{this.props.project_name}</li>
+
 			)
 		}
 	})
