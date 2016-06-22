@@ -15,3 +15,5 @@ sudo rm -rf /etc/rc3.d/S03cassandra
 sudo rm -rf /etc/apt/sources.list.d/cassandra.sources.list
 sudo rm -rf /etc/apt/sources.list.d/cassandra.sources.list.save
 sudo rm -rf /etc/security/limits.d/cassandra.conf
+CREATE KEYSPACE "demo"
+  WITH REPLICATION = {'class' : 'NetworkTopologyStrategy', 'dc1' : 3, 'dc2' : 2};
