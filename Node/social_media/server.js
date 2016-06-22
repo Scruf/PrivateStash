@@ -9,10 +9,17 @@ var oa = new OAuth(
 	"https://api.twitter.com/oauth/access_token",
 	 key.TWITER_CONSUMER_KEY,
 	 key.TWITTER_CONSUMER_SECRET,
-	 'https://test-scruff93.c9.io'
-	 "HMAC-SHA1"
+	"1.0",
+	"https://api.twitter.com/oauth/authorize",
+	"HMAC-SHA1"
 );
-console.log(oa);
+
+oa.get('https://api.twitter.com/1.1/statuses/update.json?status=Maybe%20he%27ll%20finally%20find%20his%20keys.%20%23peterfalk','774553603-BXCIo5xpRl1CAA52g3yssAAzRlWbx9t7Oqi3aRPz','S7aScfhqSZndN9sMIVPuJ6CQypBk1nww1Ws4gMW1g9r0S',function(err,data,resp){
+	if(err)
+		console.log(err);
+	else
+		console.log(data);
+})
 app.post('/twiter', function(req,res,next){
 
 });
