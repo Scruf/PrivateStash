@@ -1,0 +1,16 @@
+{
+  "name": "social_media",
+  "version": "1.0.0",
+  "description": "post to social media server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Egor Kozitski",
+  "license": "MIT",
+  "dependencies": {
+    "oauth": "^0.9.14",
+    "oauth-1.0a": "^1.0.1",
+    "request": "^2.72.0"
+  }
+}
