@@ -1,0 +1,27 @@
+(shutterstock)
+Swagger
+	swagger is specification(RESTful) describes API
+		formates .json || .yaml
+	decribes: primitives,arrays, objects (paths object), operations,parameters(data used by an operations)
+
+	swagger supports 
+		oauth2
+	editor.swagger.io
+	better documentation with swagger-ui
+		petstore.swagger.io
+	swagger-tool-API app scafolding
+	swagger-ui UI for swagger
+	swagger-docs
+	swagger-client security definitions
+	swagger-parse
+
+(equinox)
+Redux
+	Redux predictable state container for JS apps
+		state stored as single objects in store
+
+	selectors compute derived data
+	use reselect: efficient only recompute 
+	minimal data necessary in dumb Redux
+
+
