@@ -1,0 +1,15 @@
+{
+  "name": "save",
+  "version": "1.0.0",
+  "description": "Save JSON to mongoose",
+  "main": "save.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Egor Kozitski",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.13.1",
+    "mongoose": "^4.5.2"
+  }
+}

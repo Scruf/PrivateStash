@@ -1,0 +1,57 @@
+[{
+		"project_name": "Nova",
+		"project_price": 196,
+		"project_description": "Some stuffs to have if possible",
+		"project_items": [{
+			"item_name": "3m tape",
+			"item_price": 4.67
+		}, {
+			"item_name": "Desk matt",
+			"item_price": 19.99
+		}, {
+			"item_name": "Motheboard",
+			"item_price": 138.49
+		}, {
+			"item_name": "knife",
+			"item_price": 32.99
+		}]
+	}, {
+		"project_name": "Nova Bag",
+		"project_price": 159.99,
+		"project_description": "New bag for the college",
+		"project_items": [{}]
+	}, {
+		"project_name": "Nova Resume",
+		"project_price": 300,
+		"project_description": "Resume Revision by professionals",
+		"project_items": [{}]
+	}, {
+		"project_name": "Nova Moribus",
+		"project_price": 300,
+		"project_description": "Test interview with professionals",
+		"project_items": [{}]
+	}, {
+		"project_name": "Nova calciamentis",
+		"project_price": 200,
+		"project_description": "New ince skates",
+		"project_items": [{}]
+	}, {
+		"project_name": "Gabe",
+		"project_price": 100,
+		"project_description": "Steam summer sale",
+		"project_items": [{}]
+	}, {
+		"project_name": "Nova computer",
+		"project_price": 1300,
+		"project_description": "New Razer Laptop",
+		"project_items": [{}]
+	}, {
+		"project_name": "Nova man",
+		"project_price": 160,
+		"project_description": "Loosing",
+		"project_items": [{}]
+	}
+
+
+
+]
