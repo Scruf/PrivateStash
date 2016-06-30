@@ -9,7 +9,15 @@ const db = mongoose.connection;
 db.on('error',console.error.bind(console,'connection error'))
 /* GET users listing. */
 router.get('/', (req, res, next)=> {
-  res.send('respond with a resource');
+  Project.find({},(err,data)=>{
+  	if(err)
+  		throw err;
+  	else{
+  		res.send(data);
+  		res.end("Data was send")
+  	}
+
+  })
 });
 
 module.exports = router;

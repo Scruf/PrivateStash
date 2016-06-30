@@ -21,4 +21,22 @@ describe("Testing server base routes",()=>{
 			})
 		})
 	})
+	describe("Testing /project GET api",()=>{
+		it("Shoudl return 200 code",(done)=>{
+			request.get(base_url+"project",(err,response,body)=>{
+				assert.equal(200,response.statusCode);
+				done();
+			})
+		})
+	})
+
+	describe("Testing content of /project GET api",()=>{
+		it("Should return something",(done)=>{
+			request.get(base_url+"project",(err,response,body)=>{
+				assert.notEqual(0,body.length);
+				console.log(typeof body)
+				done();
+			})
+		})
+	})
 })
