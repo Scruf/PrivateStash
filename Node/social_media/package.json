@@ -1,16 +1,21 @@
 {
   "name": "social_media",
   "version": "1.0.0",
-  "description": "post to social media server",
-  "main": "server.js",
+  "description": "social media connector",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Egor Kozitski",
   "license": "MIT",
   "dependencies": {
+    "mocha": "^2.5.3",
     "oauth": "^0.9.14",
-    "oauth-1.0a": "^1.0.1",
     "request": "^2.72.0"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "gulp": "^3.9.1",
+    "jshint": "^2.9.2"
   }
 }
