@@ -12,7 +12,7 @@ describe("Testing server base routes",()=>{
 				done();
 			})
 		})
-	}),
+	})
 	describe("Testing /user GET/",()=>{
 		it("Should return 200 code",(done)=>{
 			request.get(base_url+"users",(err,response,body)=>{
@@ -34,7 +34,7 @@ describe("Testing server base routes",()=>{
 		it("Should return something",(done)=>{
 			request.get(base_url+"project",(err,response,body)=>{
 				assert.notEqual(0,body.length);
-				console.log(typeof body)
+			
 				done();
 			})
 		})

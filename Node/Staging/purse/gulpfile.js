@@ -5,13 +5,14 @@ const gulp = require('gulp'),
 	gulp_concat = require('gulp-concat'),
 	sourcemap = require('gulp-sourcemaps'),
 	uglify = require('gulp-uglify'),
+	gulp_mocha = require('gulp-mocha'),
 	jshint = require('gulp-jshint'),
 	sass = require('gulp-sass'),
 	livereload = require('gulp-livereload'),
 	js_path=['app.js','./routes/**/*.js','./models/Project.js','./public/javascripts/**/*.js'];
 
 
-gulp.task('default',['watch','nodemon']);
+gulp.task('default',['watch','nodemon','mocha']);
 
 gulp.task('nodemon',()=>{
 	gulp_nodemon({
@@ -22,7 +23,11 @@ gulp.task('nodemon',()=>{
 	})
 	.on('restart');
 });
-
+//runnig mocah tests
+// gulp.task('mocha',()=>{
+// 	return gulp.src('./test/server_test.js',{read:false})
+// 			.pipe(gulp_mocha({reporter: 'nyan'}));
+// });
 //watching routes
 gulp.task('lint',()=>{
 	console.log('lining')
