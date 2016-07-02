@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const key = require('./api_key');
+const twitter_client = require('./twiter');
 const winston = require('winston');
 const method_override = require('method-override');
 const body_parser = require('body-parser');
@@ -52,7 +53,7 @@ passport.use(new TwitterStrategy({
     callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, cb) {
-  	console.log(profile);
+  	console.log(twitter_client.get_user_list(profile.id));
   }
 ));
 console.log(passport.authenticate);
