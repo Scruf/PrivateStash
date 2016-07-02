@@ -14,7 +14,7 @@ let client = new twitter({
 })
 
 
-client.get('account/verify_credentials',(err,response,data)=>{
+client.get('friends/list.json?user_id=774553603',(err,response,data)=>{
 	console.log("response=>",response);
 	console.log("\n");
 	console.log("data=>",data);

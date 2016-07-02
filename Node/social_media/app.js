@@ -55,7 +55,7 @@ passport.use(new TwitterStrategy({
   	console.log(profile);
   }
 ));
-console.log(passport);
+console.log(passport.authenticate);
 app.get("/",(req,res,next)=>{
   res.send("Hello World");
   res.end("Request to root was made");
