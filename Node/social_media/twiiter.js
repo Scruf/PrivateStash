@@ -9,13 +9,14 @@ let client = new twitter({
 	consumer_key:Twitter.TWITTER_CONSUMER_KEY,
 	consumer_secret:Twitter.TWITTER_CONSUMER_SECRET,
 	access_token_key:Twitter.TWITTER_ACCESS_TOKEN,
-	access_token_secret:Twitter.TWITTER_ACCESS_TOKEN_SECRET
+	access_token_secret:Twitter.TWITTER_ACCESS_TOKEN_SECRET,
+	callbackURL:'http://127.0.0.1:8000:/login/twitter/return'
 })
-app.listen(8000);
 
-passport.use(new twitter_passport({
-	 consumerKey: Twitter.TWITTER_CONSUMER_KEY,
-     consumerSecret: Twitter.TWITTER_CONSUMER_SECRET,
-     callbackURL:"https://localhost:8000"
 
-}))
+client.get('account/verify_credentials',(err,response,data)=>{
+	console.log("response=>",response);
+	console.log("\n");
+	console.log("data=>",data);
+	console.log("\n");
+})
