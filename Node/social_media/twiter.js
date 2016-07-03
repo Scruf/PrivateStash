@@ -15,21 +15,17 @@ let client = new twitter({
 
 const Twitter_Client = module.exports= {
 	get_user_list: (user_id)=>{
-		console.log(user_id)
-		let client_response = client.get("friends/list.json?user_id="+user_id,(err,response,data)=>{
-			if(err)
-				return err;
-			else{
-				
-				return response;
-			}
-		});
-		console.log(client_response)
+		
+		return new Promise((fulfill,reject)=>{
+			client.get("friends/list.json?user_id="+user_id,(err,response,data)=>{
+				if(err){
+					return reject(err);
+				}
+				else{
+					return fulfill(response)
+				}
+			})
+		})
 	}
+
 }
-// client.get('friends/list.json?user_id=774553603',(err,response,data)=>{
-// 	console.log("response=>",response);
-// 	console.log("\n");
-// 	console.log("data=>",data);
-// 	console.log("\n");
-// })

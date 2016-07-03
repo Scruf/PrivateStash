@@ -53,7 +53,9 @@ passport.use(new TwitterStrategy({
     callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, cb) {
-  	console.log(twitter_client.get_user_list(profile.id));
+  	twitter_client.get_user_list(profile.id).then((done)=>{
+  		console.log(done);
+  	});
   }
 ));
 console.log(passport.authenticate);
