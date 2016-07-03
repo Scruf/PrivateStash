@@ -1,0 +1,30 @@
+{
+  "name": "social",
+  "version": "1.0.0",
+  "description": "Cassandra Server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Egor Kozitski",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^1.5.4",
+    "gulp-watch": "^4.3.8",
+    "jshint": "^2.9.2"
+  },
+  "dependencies": {
+    "assert": "^1.4.1",
+    "body-parser": "^1.15.2",
+    "cassandra-driver": "^3.1.1",
+    "express": "^4.14.0",
+    "lodash": "^4.13.1",
+    "method-override": "^2.3.6",
+    "mocha": "^2.5.3",
+    "morgan": "^1.7.0",
+    "request": "^2.72.0",
+    "winston": "^2.2.0"
+  }
+}
