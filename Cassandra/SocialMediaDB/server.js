@@ -5,8 +5,21 @@ const express = require('express'),
 	  method_override = require('method-override'),
 	  body_parser = require('body-parser'),
 	  winston = require('winston'),
-	  cassandra_client = require('cassandra-driver');
+	  cassandra_client = require('cassandra-driver'),
+	  client = new cassandra_client.Client({contactPoints:['127.0.0.1'],keyspace:'users'});
 
+client.connect((err)=>{
+	if(err){
+		client.shutdown();
+		return console.error('There was connection error',err);
+	}else{
+		 console.log('Connected to cluster with %d host(s): %j', client.hosts.length, client.hosts.keys());
+ 		 console.log('Keyspaces: %j', Object.keys(client.metadata.keyspaces));
+  		console.log('Shutting down');
+  		client.shutdown();
+	}
+
+})
 
 let logger = new winston.Logger({
 	transports:[
