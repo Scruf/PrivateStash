@@ -53,9 +53,15 @@ passport.use(new TwitterStrategy({
     callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, cb) {
-  	twitter_client.get_user_list(profile.id).then((done)=>{
-  		console.log(done);
-  	});
+  		//testins user list
+  	// twitter_client.get_user_list(profile.id).then((done)=>{
+  	// 	console.log(done);
+  	// });
+  	//get user info and save it to cassandra
+  	twitter_client.get_user_details(profile.id).then((done)=>{
+  		//new keyspacae will be kreated which will clone whatever is in user profile
+		console.log(done);
+  	})
   }
 ));
 console.log(passport.authenticate);

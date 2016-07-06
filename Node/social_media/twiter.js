@@ -26,6 +26,16 @@ const Twitter_Client = module.exports= {
 				}
 			})
 		})
+	},
+	get_user_details:(user_id)=>{
+		return new Promise((fulfill,reject)=>{
+			client.get("account/verify_credentials.json?user_id="+user_id,(err,response,data)=>{
+				if(err)
+					return reject(err);
+				else
+					return fulfill(response);
+			})
+		})
 	}
 
 }
