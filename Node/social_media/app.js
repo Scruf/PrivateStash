@@ -78,5 +78,18 @@ app.get('/auth/twitter/callback',
     // Successful authentication, redirect home.
     res.redirect('/');
 });
+//register user
+app.post('/register',(req,res,next)=>{
+	let email = req.body['email'];
+	let password = req.body['password'];
+	let social_mdei = req.body['social'];
+	let confirm_password = req.body['confirm_password'];
+	if(password!=confirm_password){
+		req.end("Password does not mathc")
+	}
+	else{
+
+	}
+})
 console.log("Listening on port 3000");
 app.listen(3000);
