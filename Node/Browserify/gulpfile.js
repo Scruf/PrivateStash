@@ -36,6 +36,31 @@ gulp.task('browserify-test', ['lint-test'],()=>{
 		.pipe(rename('client-test.js'))
 		.pipe(gulp.dest('build'))
 })
+gulp.task('test',['lint-test','browserify-test'],()=>{
+	return gulp.src('test/client/index.html')
+		.pipe(mocha_phantom())
+})
+gulp.task('styles',()=>{
+	return gulp.src('client/less/index.less')
+		.pipe(less())
+		.pipe(autoprefixer({cascade: true}))
+		.pipe(rename('car-finder.css'))
+		.pipe(gulp.dest('build'))
+		.pipe(gulp.dest('public/stylesheets'));
+});
+gulp.task('minify',['styles'],()=>{
+	return gulp.src('build/car-finder.css')
+			.pipe(minify_css())
+			.pipe(rename('car-finder.min.css'))
+			.pipe(gulp.dest('public/stylesheets'))
+})
+gulp.task('uglify',['browserify-client'],()=>{
+	return gulp.src('build/car-finder.js')
+			.pipe(uglify())
+			.pipe(rename('car-finder.min.js'))
+			.pipe(gulp.dest('public/javascripts'))
+})
+gulp.task('build', ['uglify','minify']);
 gulp.task('watch',()=>{
 	gulp.watch('client/**/*.js',['browserify-client'])
 	gulp.watch('test/client/**/*.js',['browserify-test'])
