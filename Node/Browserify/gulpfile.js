@@ -65,3 +65,4 @@ gulp.task('watch',()=>{
 	gulp.watch('client/**/*.js',['browserify-client'])
 	gulp.watch('test/client/**/*.js',['browserify-test'])
 })
+gulp.task('default',['build','watch']);
