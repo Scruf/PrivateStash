@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build":"webpack --debug"    
+    "build": "webpack --debug"
   },
   "author": "Egor Kozitski",
   "license": "MIT",
