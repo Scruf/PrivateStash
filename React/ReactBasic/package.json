@@ -4,7 +4,8 @@
   "description": "Github batlle",
   "main": "index.js",
   "scripts": {
-   "go": "webpack -p"
+   "go": "webpack -p",
+   "start": "webpack-dev-server"
   },
   "author": "Egor Kozitski",
   "license": "MIT",
