@@ -1,0 +1,27 @@
+{
+  "name": "bar",
+  "version": "1.0.0",
+  "description": "Bar maraphon ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Egor Kozitski",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "lodash": "^4.13.1",
+    "method-override": "^2.3.6",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.9.2",
+    "path": "^0.12.7",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "request": "^2.73.0",
+    "yelp": "^1.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1"
+  }
+}
