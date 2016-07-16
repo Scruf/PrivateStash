@@ -7,6 +7,7 @@ let GITHUB_DATA = {
 
 const React = require('react');
 const ReactDom = require('react-dom');
+const routes = require('./config/routes')
 
 
 let PROFILE_PIC = React.createClass({
@@ -69,6 +70,6 @@ let Avatar = React.createClass({
 })
 
 ReactDom.render(
-	<Avatar user={GITHUB_DATA}/>,
+	routes,
 	document.getElementById('app')
 );
