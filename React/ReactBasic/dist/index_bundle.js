@@ -10951,21 +10951,63 @@
 
 	"use strict";
 	
+	let GITHUB_DATA = {
+		name: "Egor Kozitski",
+		username: "Scruf",
+		image: "https://avatars2.githubusercontent.com/u/7702355?v=3&s=460"
+	};
+	
 	const React = __webpack_require__(172);
 	const ReactDom = __webpack_require__(104);
 	
-	let FOO = React.createClass({
-		displayName: 'FOO',
+	let PROFILE_PIC = React.createClass({
+		displayName: "PROFILE_PIC",
 	
-		render: () => {
+		render: function () {
+			return React.createElement("img", { src: this.props.image });
+		}
+	});
+	let PROFILE_URL = React.createClass({
+		displayName: "PROFILE_URL",
+	
+		render: function () {
 			return React.createElement(
-				'div',
+				"div",
 				null,
-				' Hello World'
+				React.createElement(
+					"a",
+					{ href: "https://github.com/" + this.props.username },
+					this.props.username
+				)
 			);
 		}
 	});
-	ReactDom.render(React.createElement(FOO, null), document.getElementById('app'));
+	let NAME_TAG = React.createClass({
+		displayName: "NAME_TAG",
+	
+		render: function () {
+			return React.createElement(
+				"div",
+				null,
+				this.props.name
+			);
+		}
+	});
+	let Avatar = React.createClass({
+		displayName: "Avatar",
+	
+		render: function () {
+			return React.createElement(
+				"div",
+				null,
+				React.createElement(PROFILE_PIC, { image: "https://avatars2.githubusercontent.com/u/7702355?v=3&s=460" }),
+				React.createElement(PROFILE_URL, { username: this.props.user.username }),
+				React.createElement(NAME_TAG, { name: this.props.user.name })
+			);
+		}
+	});
+	
+	ReactDom.render(React.createElement(Avatar, { user: GITHUB_DATA }), document.getElementById('app'));
 
 /***/ },
 /* 89 */
