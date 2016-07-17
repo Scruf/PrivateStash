@@ -1,0 +1,27 @@
+{
+  "name": "roulet",
+  "version": "1.0.0",
+  "description": "Roulet to decide what to watch",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Egor Kozitski",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cheerio": "^0.20.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "lodash": "^4.13.1",
+    "mongoose": "^4.5.4",
+    "morgan": "^1.7.0",
+    "path": "^0.12.7",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "request": "^2.73.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1"
+  }
+}

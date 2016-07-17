@@ -1,0 +1,21 @@
+{
+  "name": "stewie",
+  "version": "1.0.0",
+  "description": "Family Guy Scraper",
+  "main": "scrape.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Egor Kozitski",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^0.20.0",
+    "lodash": "^4.13.1",
+    "mongoose": "^4.5.4",
+    "nodemon": "^1.9.2",
+    "request": "^2.73.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1"
+  }
+}
