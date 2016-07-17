@@ -5,11 +5,25 @@ var HelloWorld = React.createClass({
 		)
 	}
 })
+var Link = React.createClass({
+	render: function(){
+		<div>
+			Something
+		</div>
+	}
+})
 var LocationButton = React.createClass({
+	handleClick: function(){
+		navigator.geolocation.getCurrentPosition(function(position){
+			<Location>
+				{this.props.children}
+			</Location>
+		})
+	},
 	render: function(){
 		return (
 			<div>
-				<button className="btn btn-success">Get Set</button>
+				<button className="btn btn-success" onClick={this.handleClick}>Get Set</button>
 			</div>
 		)
 	}
