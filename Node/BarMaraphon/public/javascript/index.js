@@ -5,19 +5,20 @@ var HelloWorld = React.createClass({
 		)
 	}
 })
-var Link = React.createClass({
+
+var Location = React.createClass({
 	render: function(){
 		<div>
-			Something
+			Something Cool
 		</div>
 	}
 })
 var LocationButton = React.createClass({
 	handleClick: function(){
 		navigator.geolocation.getCurrentPosition(function(position){
-			<Location>
-				{this.props.children}
-			</Location>
+			console.log("Something");
+			<Location/>
+			
 		})
 	},
 	render: function(){

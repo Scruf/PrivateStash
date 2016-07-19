@@ -14,6 +14,8 @@ let client = new twitter({
 })
 
 const Twitter_Client = module.exports= {
+	//trying out rest api
+
 	get_user_list: (user_id)=>{
 		
 		return new Promise((fulfill,reject)=>{
@@ -35,6 +37,16 @@ const Twitter_Client = module.exports= {
 				else
 					return fulfill(response);
 			})
+		})
+	},
+	post_status: (user_id)=>{
+		client.post("statuses/update?token_secret="+user_id,{status:'I love Node and Twitter'},(err,tweet,response)=>{
+			if(err)
+				throw err;
+			else{
+				console.log(tweet);
+				console.log(response);
+			}
 		})
 	}
 

@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const key = require('./api_key');
+const Oauth = require('oauth-1.0a');
 const twitter_client = require('./twiter');
 const winston = require('winston');
 const method_override = require('method-override');
@@ -53,18 +54,47 @@ passport.use(new TwitterStrategy({
     callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, cb) {
-  		//testins user list
-  	// twitter_client.get_user_list(profile.id).then((done)=>{
-  	// 	console.log(done);
-  	// });
-  	//get user info and save it to cassandra
-  	twitter_client.get_user_details(profile.id).then((done)=>{
-  		//new keyspacae will be kreated which will clone whatever is in user profile
-		console.log(done);
-  	})
+ 	console.log("token secret",tokenSecret);
+ 	console.log("\n");
+ 	console.log("profile",profile);
+ 	console.log("\n");
+
+ 	  // 		//testins user list
+  // 	// twitter_client.get_user_list(profile.id).then((done)=>{
+  // 	// 	console.log("displaying list",done);
+  // 	// });
+  // 	//get user info and save it to cassandra
+  // 	twitter_client.get_user_details(profile.id).then((done)=>{
+  // 		//new keyspacae will be kreated which will clone whatever is in user profile
+		// console.log("Displaying user details",done);
+  // 	})
   }
-));
-console.log(passport.authenticate);
+))
+/*
+	Playing around with twittwer rest api and oauth
+*/
+var OAuth = require('oauth');
+var oauth = new OAuth.OAuth(
+  'https://api.twitter.com/oauth/request_token',
+  'https://api.twitter.com/oauth/access_token',
+  key.TWITTER_CONSUMER_KEY,
+  key.TWITTER_CONSUMER_SECRET,
+  '1.0A',
+  null,
+  'HMAC-SHA1'
+);
+oauth.getOAuthRequestToken((error,oauthToken,oauthTokenSecret,results)=>{
+	if(error)
+		throw error;
+	else{
+		console.log(oauthToken)
+		console.log("--------------------------------------------------------------------\n")
+		console.log(oauthTokenSecret);
+		console.log("--------------------------------------------------------------------\n")
+		console.log(results);
+	}
+})
+
 app.get("/",(req,res,next)=>{
   res.send("Hello World");
   res.end("Request to root was made");
@@ -91,5 +121,6 @@ app.post('/register',(req,res,next)=>{
 
 	}
 })
+
 console.log("Listening on port 3000");
 app.listen(3000);
