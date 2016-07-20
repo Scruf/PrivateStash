@@ -87,11 +87,21 @@ oauth.getOAuthRequestToken((error,oauthToken,oauthTokenSecret,results)=>{
 	if(error)
 		throw error;
 	else{
-		console.log(oauthToken)
+		console.log("Obtained ",oauthToken)
 		console.log("--------------------------------------------------------------------\n")
 		console.log(oauthTokenSecret);
 		console.log("--------------------------------------------------------------------\n")
 		console.log(results);
+		request.get('https://api.twitter.com/oauth/authenticate?oauth_token='+oauthToken, (err,response,body)=>{
+			if(err)
+				throw err;
+			else{
+				console.log("response-> ",response);
+				console.log("\n");
+				response.render(body);
+
+			}
+		})
 	}
 })
 
