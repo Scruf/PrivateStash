@@ -3,16 +3,17 @@ var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
-
+var PromptConatiner = require('../containers/PromptContainer');
 var Main  = require('../component/Main');
 var Home  = require('../component/Home');
-
 var routes = (
-	<Router >
+	<Router history={ReactRouter.hashHistory}>
 		<Route path = '/' component={Main}>
-		<IndexRoute component={Home} />
+			<IndexRoute component={Home} />
+			<Route path='playerOne' header="Player One" component={PromptConatiner}/>
+			<Route path='playerTwo/:playerOne' header="Player Two" component={PromptConatiner}/>
 		</Route>
 	</Router>
-
-)
+);
+console.log(routes);
 module.exports=routes;
