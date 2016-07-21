@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const key = require('./api_key');
+const fs = require('fs');
 const Oauth = require('oauth-1.0a');
 const twitter_client = require('./twiter');
 const winston = require('winston');
@@ -92,14 +93,11 @@ oauth.getOAuthRequestToken((error,oauthToken,oauthTokenSecret,results)=>{
 		console.log(oauthTokenSecret);
 		console.log("--------------------------------------------------------------------\n")
 		console.log(results);
-		request.get('https://api.twitter.com/oauth/authenticate?oauth_token='+oauthToken, (err,response,body)=>{
+		request.get('https://api.twitter.com/oauth/authorize?oauth_token='+oauthToken, (err,response,body)=>{
 			if(err)
 				throw err;
 			else{
-				console.log("response-> ",response);
-				console.log("\n");
-				response.render(body);
-
+				console.log(response)
 			}
 		})
 	}
@@ -131,6 +129,7 @@ app.post('/register',(req,res,next)=>{
 
 	}
 })
+
 
 console.log("Listening on port 3000");
 app.listen(3000);
