@@ -1,9 +1,9 @@
 var React = require('react');
 
-function ConfirmBattle(props){
-	return (
-		<div> Confirm Battle Container</div>
-	)
+function Confirmbattle(props){
+	console.log("Inside ConfirmBattle");
+	return props.isLoading === true ? <p> Loading </p> : <p>Some random stuff I do not care about </p>
+	
 }
 
-module.exports =ConfirmBattle;
+module.exports = Confirmbattle;
