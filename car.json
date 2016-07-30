@@ -1,0 +1,51 @@
+[
+	{
+		'car_type':'2010 Dodge Charger SXT',
+		'price':8980,
+		'millage':73700,
+		'address':'134-01 Atlantic Avenue Richmond Hill, NY 11418',
+		'url':'https://www.cargurus.com/Cars/inventorylisting/viewDetailsFilterViewInventoryListing.action?sourceContext=carGurusHomePage_false_0&formSourceTag=104&entitySelectingHelper.selectedEntity=d733&zip=07102#listing=147457755_isFeatured'
+	},
+	{
+		'car_type':'2010 Dodge Charger 3.5L',
+		'price':9980,
+		'millage':80001,
+		'address':'134-01 Atlantic Avenue Richmond Hill, NY 11418',
+		'url':'https://www.cargurus.com/Cars/inventorylisting/viewDetailsFilterViewInventoryListing.action?sourceContext=carGurusHomePage_false_0&formSourceTag=104&entitySelectingHelper.selectedEntity=d733&zip=07102#listing=144843001_isFeatured'
+	},
+	{
+		'car_type':'2007 Dodge Charger R/T ',
+		'price':8990,
+		'millage':71351,
+		'address':'316 32nd St Union City, NJ 07087',
+		'url':'https://www.cargurus.com/Cars/inventorylisting/viewDetailsFilterViewInventoryListing.action?sourceContext=carGurusHomePage_false_0&formSourceTag=104&entitySelectingHelper.selectedEntity=d733&zip=07102#listing=149151374'
+	},
+	{
+		'car_type':'2010 Dodge Charger 3.5L',
+		'price':9980,
+		'millage':80001,
+		'address':'134-01 Atlantic Avenue Richmond Hill, NY 11418',
+		'url':'https://www.cargurus.com/Cars/inventorylisting/viewDetailsFilterViewInventoryListing.action?sourceContext=carGurusHomePage_false_0&formSourceTag=104&entitySelectingHelper.selectedEntity=d733&zip=07102#listing=144843001_isFeatured'
+	},
+	{
+		'car_type':'2010 Dodge Charger SXT',
+		'price':8494,
+		'millage':82626,
+		'address':'60 Railroad Ave, STE 104 Hasbrouck Heights, NJ 07604',
+		'url':'https://www.cargurus.com/Cars/inventorylisting/viewDetailsFilterViewInventoryListing.action?sourceContext=carGurusHomePage_false_0&formSourceTag=104&entitySelectingHelper.selectedEntity=d733&zip=07102#listing=148532321'
+	},
+	{
+		'car_type':'2009 Dodge Charger SXT ',
+		'price':9401,
+		'millage':70043,
+		'address':99 Hazel St Paterson, NJ 07503',
+		'url':'https://www.cargurus.com/Cars/inventorylisting/viewDetailsFilterViewInventoryListing.action?sourceContext=carGurusHomePage_false_0&formSourceTag=104&entitySelectingHelper.selectedEntity=d733&zip=07102#listing=137677146'
+	},
+	{
+		'car_type':'2010 Dodge Charger SXT',
+		'price':8980,
+		'millage':70219,
+		'address':'134-01 Atlantic Avenue Richmond Hill, NY 11418',
+		'url':'https://www.cargurus.com/Cars/inventorylisting/viewDetailsFilterViewInventoryListing.action?sourceContext=carGurusHomePage_false_0&formSourceTag=104&entitySelectingHelper.selectedEntity=d733&zip=07102#listing=146113550'
+	}
+]
