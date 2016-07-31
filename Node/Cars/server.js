@@ -21,6 +21,7 @@ app.get('/cars', (req,res,next)=>{
 		if(err)
 			res.send(err);
 		else{
+			res.setHeader('Access-Control-Allow-Origin', '*');
 			res.send(JSON.parse(data));
 			res.end("Respond was sended")
 		}
