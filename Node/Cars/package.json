@@ -1,0 +1,25 @@
+{
+  "name": "cars",
+  "version": "1.0.0",
+  "description": "Cars to buy",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Egor Kozitski",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "method-override": "^2.3.6",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.10.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.11.1",
+    "webpack": "^1.13.1"
+  }
+}
