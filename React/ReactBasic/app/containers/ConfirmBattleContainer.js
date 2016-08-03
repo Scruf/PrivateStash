@@ -6,22 +6,14 @@ var ConfirmBattleContainer = React.createClass({
     router: React.PropTypes.object.isRequired
   },
   getInitialState: function () {
-  	console.log("Component initial State");
-    return {
+   return {
       isLoading: true,
       playersInfo: [],
     }
   },
-  componentWillReceiveProps: function(){
-  	console.log("component will receive something I do not know");
-  },
-  componentWillUnmount: function(){
-  	console.log("Component Will Unmount Something I do not know");
-  },
-  componentWillMount: function(){
-  	console.log("Component Will Mount");
-  },
+
   handleInitiaatebattle: function(){
+ 
     this.context.router.push({
       pathname: '/results',
       state:{
@@ -42,9 +34,10 @@ var ConfirmBattleContainer = React.createClass({
     // Fetch info from github then update state
   },
   render: function () {
+    console.log("Displaying Confirm Battle State",this.state);
     return (
       <Confirmbattle
-        onInitiateBattle ={this.state.handleInitiaatebattle}
+        onInitiateBattle ={this.handleInitiaatebattle}
         isLoading={this.state.isLoading}
         playersInfo={this.state.playersInfo} />
     )

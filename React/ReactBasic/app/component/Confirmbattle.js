@@ -9,6 +9,7 @@ function lol(obj){
 }
 function Confirmbattle(props){
 	console.log("Inside ConfirmBattle");
+
 	return props.isLoading === true ? <p> Loading </p> :<div className="jumbotron col-sm-12 text-center">
 			<h1>Confirm Players</h1>
 				<div className="col-sm-8 col-sm-offset-2">
@@ -20,7 +21,7 @@ function Confirmbattle(props){
 				
 						
 						<UserDetailsWrapper header="Player 2">
-							<UserDetails info={props.playersInfo[0]} />
+							<UserDetails info={props.playersInfo[1]} />
 						</UserDetailsWrapper>
 				</div>
 			<div className="col-sm-8 sol-sm-offset-2">
