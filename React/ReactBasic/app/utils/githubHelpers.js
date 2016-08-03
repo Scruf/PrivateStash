@@ -5,6 +5,15 @@ var param = "?client_id="+id+"&client_secret="+secret_id;
 function getUserName(username){
 	return axios.get('https://api.github.com/users/'+username+param);
 }
+function getRepos(username){
+	//fetch github repos info
+}
+function getTotalStars(stars){
+	//calculate all the stars based on the user repos
+}
+function getPlayersData(player){
+	
+}
 var helpers ={
 	getPlayersInfo: function(players){
 		//fetch data from githuib
@@ -17,6 +26,10 @@ var helpers ={
 		}).catch(function(err){
 			console.warn("Error "+err)
 		})
+	},
+
+	battle: function(players){
+
 	}
 }
 
