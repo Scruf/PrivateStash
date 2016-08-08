@@ -11,7 +11,8 @@ function lol(obj){
 function Confirmbattle(props){
 	console.log("Inside ConfirmBattle");
 
-	return props.isLoading === true ? <Laoding/>:<div className="jumbotron col-sm-12 text-center">
+	return props.isLoading === true ? <Laoding speed={600} text='Waiting' />:
+										<div className="jumbotron col-sm-12 text-center">
 			<h1>Confirm Players</h1>
 				<div className="col-sm-8 col-sm-offset-2">
 			

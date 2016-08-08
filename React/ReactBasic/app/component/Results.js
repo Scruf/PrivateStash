@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var UserDetails = require('./UserDetails');
+var Loading = require('./Loading')
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
 var UserDetailsWrapper = require('./UserDetailsWrapper');
@@ -14,6 +15,9 @@ function  StartOver(){
 	)
 }
 function Results(props){
+	if(props.isLoading === true){
+		return <Loading text="One Moment Please" speed={500} />
+	}
 	if (props.scores[0]===props.scores[1]){
 		return(
 			<div className="jumbotron col-sm-12 text-center">

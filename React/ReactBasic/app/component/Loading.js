@@ -1,11 +1,21 @@
 var React = require('react');
-
+var propTypes = React.PropTypes;
 
 var Loading = React.createClass({
+	propTypes:{
+		text: propTypes.string,
+		speed:propTypes.number
+	},
+	getDefaultProps: function(){
+    	return {
+      	text:'Loading',
+      	speed:621
+      }
+  	},
 	getInitialState: function(){
-		this.originalText = 'Loading';
+		this.originalText = this.props.text;
 		return {
-			text: 'loading'
+			text: this.originalText
 		}
 	},
 	componentDidMount: function(){
@@ -20,7 +30,7 @@ var Loading = React.createClass({
 					text:this.state.text+'.'
 				})
 			}
-		}.bind(this),300)
+		}.bind(this),this.props.speed)
 	},
 	componentWillUnmount: function(){
 		clearInterval(this.interval);
