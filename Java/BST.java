@@ -55,12 +55,8 @@ public class BST{
 	public boolean search(int data){
 		return search(root,data);
 	}
-	public void delete(int data){
-		if (root==null)
-			System.out.print("Nothing to insert");
-		else{
-			if()
-		}
+	private Node delete(Node root,int data){
+		
 	}
 	public static void main(String []args){
 
