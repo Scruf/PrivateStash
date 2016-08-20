@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Main Page</title>
+</head>
+<body>
+	<h1>Hello From html</h1>
+		<form method="POST" action='validate'>
+			{%csrf_token%}
+			<label>Email:</label>
+			<input type="text" name="email" value="Please enter your email address" />
+			<br />
+			<label>Password:</label>
+			<input type="text" name="password" value="Please enter your password" />
+			<br />
+
+			<button type='submit'> Click me</button>
+		</form>
+</body>
+</html>
