@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Log In</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	{% load static %}
+	<link rel="stylesheet" href="../static/report/css/login.css" />
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+</head>
+<body>
+	<div class="container">
+		
+		<form method="POST" action='validate' class="login-form">
+			{%csrf_token%}
+			<div class="row-md-4 form-header">
+				<div class="col-sm-6" style="color:white">LOGIN</div>
+				<div class="col-sm-6 " style="float:right"><p><a href="register">New ? Create account</a><p></div>
+			</div>
+			<div class="row-md-4">
+				<img src="http://hlx.co/wp-content/uploads/2015/01/logo22.png" class="logo-holder"/>
+			</div>
+			<div class="row-md-4">
+				<h4>Welcome, please login.</h5>
+			</div>
+		
+			<br />
+		<input type="email" style="border:none" name="email" id="email" placeholder="Email" class="form-control" data-error="Invalid Email" required  />
+			<br />
+		
+			<br />
+			<input type="password" style="border:none" name="password" id="password" data-minlength=1 placeholder="Password" class="form-control" data-error="Invaild Password" required />
+			<br />
+
+			<button type='submit' class="btn btn-success"> Log in</button>
+		</form>
+	</div>
+<style>
+	.error{
+		margin-right :auto%;
+		color:red;
+		width:90%;
+	}
+</style>
+
+</body>
+</html>
