@@ -27,14 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
 # Application definition
-app =  os.path.join(BASE_DIR,'report.apps.ReportConfig')
-print "------"
-print type(app)
-print "------"
+
 INSTALLED_APPS = [
     'django.contrib.admin',
-    '%s/report.apps.ReportConfig'%str(BASE_DIR),
+    'report.apps.ReportConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
