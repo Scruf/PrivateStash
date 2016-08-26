@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Report</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+	<h1 align="center">Profit &amp Loss Report</h1>
+		<table align="center" width="80%">	
+		{%for l in list%}
+		<tr>
+			<td align="center">
+				<font size="2" face="verdana">{{l.Channel}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.OrderID}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.TimeOfOrder}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.Qty}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.ProductID}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.ProductName}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.PhysicalQty}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.TotalReceived}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.ItemCost}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.IsSalesManCost}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.CollectTax}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.CollectedShippingFee}}
+				</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.eBaySubsidy}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.ChanngelFees}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana"> {{l.ProductCount}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.NetProffit_}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.NetProffit}}</font>
+			</td>
+			<td align="center">
+				<font size="2" face="verdana">{{l.CostType}}</font>
+			</td>
+		</tr>
+
+		
+		{%endfor%}
+		</table>
+	
+
+</body>
+</html>
