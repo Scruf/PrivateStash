@@ -146,4 +146,48 @@ Now we will push information to the Charge table
 
 
 
+Get Product Category for ASIN Returns the parent product categories that a product belongs to, based on ASIN.
+
+.. code-block:: python
+	
+
+	#@param asin is asin of the product for which the category will be returned
+	def getProductCategoriesForASIN(asin)
+		#validating whether asin was supplied or not
+		if len(asin)==0:
+			#if not than raise an error
+			raise ValueError("ASIN value cannot be left empty")
+		#otherwise call product_categories for asin from botto
+		else:
+			#get_product_categories_for_asin requires marketplacename and asi as it parameters
+			product_category = Constants.MWS_CONNECTION.get_product_categories_for_asin(\
+														MarketplaceId=Constants.MWS_CONFIG['marketplaceid'],\
+														ASIN=asin).GetProductCategoriesForASINResult
+			#construct product obj from products result
+			product_obj = {}
+			#iterate over product response 
+			for product in product_category.Self:
+				#update the prodcut object with nessecary information which will be used to construct query
+				product_obj.update({
+					'category_name':product.ProductCategoryName,
+					'category_id':product.ProductCategoryId,
+					'asin':asin,
+					'rp_set_clinet_id':current_rp_set_client_id,
+					'rp_set_seller_id':current_rp_set_seller_id
+				})
+			#construct query string 
+			query = """SELECT usp_add_product_category('{}','{}','{}','{}','{}')""".format(
+				product_obj['category_name'],product_obj['category_id'],product_obj['asin'],product_obj['rp_set_clinet_id'],
+				product_obj['rp_set_seller_id']
+			)
+			#execute the query
+			Constants.PGSQL_CUR.execute(query)
+			print("--------------------------------------------------------------------------------------------------------")
+			print("Asin to be added '{}'\n".format(asin))
+			print("--------------------------------------------------------------------------------------------------------")
+			Constants.PGSQL_CONN.commit()			# print(prod
+
+
+
+
  

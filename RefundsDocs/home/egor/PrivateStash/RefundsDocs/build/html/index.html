@@ -167,6 +167,44 @@ First we push information to finance type table</p>
         <span class="n">Constants</span><span class="o">.</span><span class="n">PGSQL_CONN</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 </pre></div>
 </div>
+<p>Get Product Category for ASIN Returns the parent product categories that a product belongs to, based on ASIN.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">#@param asin is asin of the product for which the category will be returned</span>
+<span class="k">def</span> <span class="nf">getProductCategoriesForASIN</span><span class="p">(</span><span class="n">asin</span><span class="p">)</span>
+        <span class="c1">#validating whether asin was supplied or not</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">asin</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="c1">#if not than raise an error</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ASIN value cannot be left empty&quot;</span><span class="p">)</span>
+        <span class="c1">#otherwise call product_categories for asin from botto</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="c1">#get_product_categories_for_asin requires marketplacename and asi as it parameters</span>
+                <span class="n">product_category</span> <span class="o">=</span> <span class="n">Constants</span><span class="o">.</span><span class="n">MWS_CONNECTION</span><span class="o">.</span><span class="n">get_product_categories_for_asin</span><span class="p">(</span>\
+                                                                                                        <span class="n">MarketplaceId</span><span class="o">=</span><span class="n">Constants</span><span class="o">.</span><span class="n">MWS_CONFIG</span><span class="p">[</span><span class="s1">&#39;marketplaceid&#39;</span><span class="p">],</span>\
+                                                                                                        <span class="n">ASIN</span><span class="o">=</span><span class="n">asin</span><span class="p">)</span><span class="o">.</span><span class="n">GetProductCategoriesForASINResult</span>
+                <span class="c1">#construct product obj from products result</span>
+                <span class="n">product_obj</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="c1">#iterate over product response</span>
+                <span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">product_category</span><span class="o">.</span><span class="n">Self</span><span class="p">:</span>
+                        <span class="c1">#update the prodcut object with nessecary information which will be used to construct query</span>
+                        <span class="n">product_obj</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                                <span class="s1">&#39;category_name&#39;</span><span class="p">:</span><span class="n">product</span><span class="o">.</span><span class="n">ProductCategoryName</span><span class="p">,</span>
+                                <span class="s1">&#39;category_id&#39;</span><span class="p">:</span><span class="n">product</span><span class="o">.</span><span class="n">ProductCategoryId</span><span class="p">,</span>
+                                <span class="s1">&#39;asin&#39;</span><span class="p">:</span><span class="n">asin</span><span class="p">,</span>
+                                <span class="s1">&#39;rp_set_clinet_id&#39;</span><span class="p">:</span><span class="n">current_rp_set_client_id</span><span class="p">,</span>
+                                <span class="s1">&#39;rp_set_seller_id&#39;</span><span class="p">:</span><span class="n">current_rp_set_seller_id</span>
+                        <span class="p">})</span>
+                <span class="c1">#construct query string</span>
+                <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT usp_add_product_category(&#39;{}&#39;,&#39;{}&#39;,&#39;{}&#39;,&#39;{}&#39;,&#39;{}&#39;)&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">product_obj</span><span class="p">[</span><span class="s1">&#39;category_name&#39;</span><span class="p">],</span><span class="n">product_obj</span><span class="p">[</span><span class="s1">&#39;category_id&#39;</span><span class="p">],</span><span class="n">product_obj</span><span class="p">[</span><span class="s1">&#39;asin&#39;</span><span class="p">],</span><span class="n">product_obj</span><span class="p">[</span><span class="s1">&#39;rp_set_clinet_id&#39;</span><span class="p">],</span>
+                        <span class="n">product_obj</span><span class="p">[</span><span class="s1">&#39;rp_set_seller_id&#39;</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="c1">#execute the query</span>
+                <span class="n">Constants</span><span class="o">.</span><span class="n">PGSQL_CUR</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;--------------------------------------------------------------------------------------------------------&quot;</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Asin to be added &#39;{}&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">asin</span><span class="p">))</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;--------------------------------------------------------------------------------------------------------&quot;</span><span class="p">)</span>
+                <span class="n">Constants</span><span class="o">.</span><span class="n">PGSQL_CONN</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>                   <span class="c1"># print(prod</span>
+</pre></div>
+</div>
 </div>
 
 
