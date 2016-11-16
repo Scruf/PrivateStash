@@ -1,0 +1,9 @@
+DEBUG:root:This is the test message
+WARNING:root:Watch out
+INFO:root: I told you so
+DEBUG:root:This is the test message
+WARNING:root:Watch out
+INFO:root: I told you so
+11/16/2016 12:11:38 PM This is the test message
+11/16/2016 12:11:38 PM Watch out
+11/16/2016 12:11:38 PM  I told you so
