@@ -133,6 +133,69 @@ getListItems :: [Int] -> String
 
 
 getListItems [] = "Empty"
-getListItems (x::[]) = "Your list starts with "++show x
-getListItems(x:y:[]) = "Your list hast "++show x " and "++show y
-getListItems(x:xs)="The First item is "++show x " and "++show xs
+-- getListItems (x:[]) = "Your list starts with "++show x
+-- getListItems(x:y:[]) = "Your list hast "++show x " and "++show y
+-- getListItems(x:xs)="The First item is "++show x " and "++show xs
+
+getFirstItem :: String -> String
+getFirstItem [] = "Empty String"
+getFirstItem all@(x:xs) = "The first letter in " ++ all ++ "is "++[x]
+
+--Higher Order Function
+
+times4 :: Int -> Int
+times4 x = x * 4
+list = map times4 [1,23,4,5,6]
+
+mult :: [Int] -> [Int]
+mult [] = []
+mult (x:xs) = times4 x : mult xs
+
+
+areString :: [Char] -> [Char] -> Bool
+areString [] [] = True
+areString(x:xs)(y:ys) = x == y && areString xs ys
+areString _ _ = False
+
+doMult :: (Int->Int)->Int
+doMult func = func 3
+
+
+numTimes = doMult times4
+
+
+getADd :: Int ->(Int->Int)
+getADd x y = x + y
+addssome = getADd 3
+
+
+
+
+doubleW = map (\x -> x * 2)[1..10]
+
+
+doubleEVe y  = 
+	if (y `mod` 2 /= 0)
+		then y
+		else y * 2
+
+
+getClass :: Int -> String 
+
+getClass n = case n of 
+	5-> "Go Awas"
+	6->"Go somewhere else"
+	_ ->"I am batmannn"
+
+
+
+data Baseball = Pitcher 
+				| catcher
+				| infielder
+				| Outfield
+			deriving Show
+
+
+barryBones :: Baseball -> Bool
+
+barryBones Outfield = True

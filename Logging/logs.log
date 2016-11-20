@@ -1,9 +1,8 @@
-DEBUG:root:This is the test message
-WARNING:root:Watch out
-INFO:root: I told you so
-DEBUG:root:This is the test message
-WARNING:root:Watch out
-INFO:root: I told you so
-11/16/2016 12:11:38 PM This is the test message
-11/16/2016 12:11:38 PM Watch out
-11/16/2016 12:11:38 PM  I told you so
+RequestId: 'f04d1276-2101-4368-b820-668986c2addd'), RequestReportResult: RequestReportResult{}(ReportRequestInfo: ^ReportRequestInfo^{}
+	(EndDate: '2016-11-18T21:36:39+00:00',
+	StartDate: '2016-11-18T21:36:39+00:00',
+	SubmittedDate: '2016-11-18T21:36:39+00:00',
+	ReportProcessingStatus: '_SUBMITTED_',
+	Scheduled: 'false',
+	ReportRequestId: '127717017123',
+	ReportType: '_GET_MERCHANT_LISTINGS_ALL_DATA_'
