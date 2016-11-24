@@ -5,3 +5,7 @@ logging.basicConfig(filename='logs.log', level=logging.DEBUG, format='%(asctime)
 logging.debug('This is the test message')
 logging.warning('Watch out')
 logging.info(' I told you so')
+
+
+
+
