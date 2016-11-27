@@ -46,6 +46,7 @@
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 </div>
+<p>Sellercloud wrapper documentation created by Egor Kozitski</p>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -54,6 +55,29 @@
 <li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
 <li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
+<p>This section contains codes samples and method explanations</p>
+</div>
+<div class="section" id="methods">
+<h1>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h1>
+<p>Authentication with SellerCloud API</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">#First create a dicitionary which will be used for authentication</span>
+<span class="n">Credentials</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;WSDL&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;link_to_wisdl&gt;&quot;</span><span class="p">,</span><span class="s2">&quot;UserName&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;your_username&gt;&quot;</span><span class="p">,</span><span class="s2">&quot;Password&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;you_password&gt;&quot;</span><span class="p">}</span>
+<span class="c1">#authenticate with this credentials</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">Sellercloud</span><span class="o">.</span><span class="n">Sellercloud</span><span class="p">(</span><span class="n">Credentials</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt>
+<code class="descname">def GetClientID():</code></dt>
+<dd><p>Will retrieve the clients id on the Sellercloud</p>
+</dd></dl>
+
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">#will retrieve client id</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">GetClientID</span><span class="p">()</span>
+<span class="c1">#on success id will be printed</span>
+<span class="c1">#otherwise exception with terrible message will be printed</span>
+</pre></div>
+</div>
 </div>
 
 
@@ -66,6 +90,7 @@
   <ul>
 <li><a class="reference internal" href="#">Welcome to HLX&#8217;s documentation!</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
 </ul>
 <div class="relations">
 <h3>Related Topics</h3>
