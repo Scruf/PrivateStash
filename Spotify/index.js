@@ -23,7 +23,7 @@ app.use(cookie_parser())
 SpotifyRouter.route('/')
 .get((req,res,next)=>{
 	const state =  Helpers.random_string()
-	console.log(SpotifyCredentials.SpotifyClientId)
+	
 	res.cookie(state,state_key)
 	res.redirect('https://accounts.spotify.com/authorize?'+
 		querystring.stringify({
@@ -33,17 +33,20 @@ SpotifyRouter.route('/')
 			state:state
 		})
 	)
+
+
 })
 
 app.use('/',SpotifyRouter)
 
-SpotifyRouter.route('/hello')
+SpotifyRouter.route('/callback')
 .get((req,res,next)=>{
 	let code = req.query.code || null
 	let state = req.query.state || null
 	let stored_state = req.cookies ? 
 					   req.cookies[state_key] :
 					   null
+	console.log(state)
 	if (state == null || state !=stored_state){
 		res.redirect('/#'+
 			querystring.stringify({
@@ -52,6 +55,7 @@ SpotifyRouter.route('/hello')
 		)
 	}else{
 		res.clearCookie(state_key)
+		console.log("Wtf")
 		let authOptions = {
 			uri:'https://accounts.spotify.com/api/token',
 			form:{
@@ -82,7 +86,12 @@ SpotifyRouter.route('/hello')
 		})
 	}
 })
+SpotifyRouter.route('/hello')
+.get((req,res,next)=>{
+	res.send('Authorized')
+})
 app.use('/hello',SpotifyRouter)
+app.use('/callback',SpotifyRouter)
 
 
 app.listen(8000)
