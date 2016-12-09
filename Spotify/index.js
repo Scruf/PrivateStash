@@ -25,11 +25,14 @@ SpotifyRouter.route('/')
 	const state =  Helpers.random_string()
 	
 	res.cookie(state,state_key)
+	const scope ='user-read-private user-read-email'
+	
 	res.redirect('https://accounts.spotify.com/authorize?'+
 		querystring.stringify({
 			response_type:'code',
 			client_id:SpotifyCredentials.SpotifyClientId,
-			redirect_uri:'https://localhost:8000/hello',
+			scope:scope,
+			redirect_uri:'http://localhost:8000/callback',
 			state:state
 		})
 	)
@@ -44,9 +47,15 @@ SpotifyRouter.route('/callback')
 	let code = req.query.code || null
 	let state = req.query.state || null
 	let stored_state = req.cookies ? 
-					   req.cookies[state_key] :
+					   req.cookies['State'] :
 					   null
-	console.log(state)
+	console.log(stored_state)
+	// console.log("----------------------------------------------")
+	// console.log("State ",req.cookies['State'])
+	// console.log("----------------------------------------------")
+	// console.log("----------------------------------------------")
+	// console.log("stored state ", stored_state)
+	// console.log("---------------------------------------------")
 	if (state == null || state !=stored_state){
 		res.redirect('/#'+
 			querystring.stringify({
@@ -55,12 +64,12 @@ SpotifyRouter.route('/callback')
 		)
 	}else{
 		res.clearCookie(state_key)
-		console.log("Wtf")
+		
 		let authOptions = {
 			uri:'https://accounts.spotify.com/api/token',
 			form:{
 				code:code,
-				redirect_uri:'https://localhost:8000/hello',
+				redirect_uri:'https//localhost:8000/callback',
 				grant_type:'authorization_code'
 			},
 			headers:{
