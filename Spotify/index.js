@@ -75,15 +75,51 @@ SpotifyRouter.route('/callback')
 			else{
 				const access_token = body.access_token,
 					  refresh_token = body.refresh_token;
-				console.log(access_token)
-				console.log(refresh_token)
+				
 				const options = {
 					uri:'https://api.spotify.com/v1/me',
 					headers:{'Authorization':'Bearer '+access_token},
 					json:true
 				}
 				request.get(options,(error,reponse,body)=>{
-					console.log(body)
+					const id = body.id
+					
+					let current_playlist = {
+						uri:`https://api.spotify.com/v1/users/${id}/playlists`,
+						form:{
+							code:code,
+							redirect_uri:'http://localhost:8000/callback',
+							grant_type:'authorization_code'
+						},
+						headers:{
+							'Authorization':'Bearer '+access_token
+						},
+						json: true
+					}
+					request.get(current_playlist,(error,reponse,body)=>{
+						if(error)
+							throw error;
+						else{
+						
+							const playlist_id = body.items[0].id
+							const uri = `https://api.spotify.com/v1/users/${id}/playlists/${playlist_id}`
+							let playlist = {
+								uri:uri,
+								form:{
+									code:code,
+									redirect_uri:'http://localhost:8000/callback',
+									grant_type:'authorization_code'
+								},
+								headers:{
+									'Authorization':'Bearer '+access_token
+								},
+								json: true
+							}
+							console.log(playlist)
+							
+						}
+					})
+					
 				})
 			}
 		})
