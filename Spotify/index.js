@@ -1,5 +1,5 @@
 "use strict"
-const requests = require('request')
+const request = require('request')
 const SpotifyCredentials = require('./SpotifyCredentials')
 const express = require('express')
 const app = express()
@@ -44,48 +44,42 @@ app.use('/',SpotifyRouter)
 
 SpotifyRouter.route('/callback')
 .get((req,res,next)=>{
+	
 	let code = req.query.code || null
 	let state = req.query.state || null
-	let stored_state = req.cookies ? 
-					   req.cookies['State'] :
-					   null
-	console.log(stored_state)
-	// console.log("----------------------------------------------")
-	// console.log("State ",req.cookies['State'])
-	// console.log("----------------------------------------------")
-	// console.log("----------------------------------------------")
-	// console.log("stored state ", stored_state)
-	// console.log("---------------------------------------------")
-	if (state == null || state !=stored_state){
+	
+	if (state == null){
 		res.redirect('/#'+
 			querystring.stringify({
 				error:'state_mismatch'
 			})
 		)
 	}else{
-		res.clearCookie(state_key)
-		
+			
 		let authOptions = {
 			uri:'https://accounts.spotify.com/api/token',
 			form:{
 				code:code,
-				redirect_uri:'https//localhost:8000/callback',
+				redirect_uri:'http://localhost:8000/callback',
 				grant_type:'authorization_code'
 			},
 			headers:{
-				'Authorization':'Basic'+(new Buffer(SpotifyCredentials.SpotifyClientId+":"+SpotifyCredentials.SpotifyClientSecret).toString('base64'))
+				'Authorization':'Basic '+(new Buffer(SpotifyCredentials.SpotifyClientId+":"+SpotifyCredentials.SpotifyClientSecret).toString('base64'))
 			},
 			json: true
 		};
+		
 		request.post(authOptions, (error,reponse,body)=>{
-			if (err)
-				throw err;
+			if (error)
+				throw error;
 			else{
 				const access_token = body.access_token,
 					  refresh_token = body.refresh_token;
+				console.log(access_token)
+				console.log(refresh_token)
 				const options = {
 					uri:'https://api.spotify.com/v1/me',
-					headers:{'Authorization':'Bearer'+access_token},
+					headers:{'Authorization':'Bearer '+access_token},
 					json:true
 				}
 				request.get(options,(error,reponse,body)=>{

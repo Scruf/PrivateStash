@@ -11,10 +11,10 @@ var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
-var Spotify = require('./SpotifyCredentials')
-var client_id = Spotify.SpotifyClientId; // Your client id
-var client_secret = Spotify.SpotifyClientSecret; // Your secret
-var redirect_uri = 'localhost:8000/hello'; // Your redirect uri
+
+var client_id = 'CLIENT_ID'; // Your client id
+var client_secret = 'CLIENT_SECRET'; // Your secret
+var redirect_uri = 'REDIRECT_URI'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -54,9 +54,7 @@ app.get('/login', function(req, res) {
       state: state
     }));
 });
-app.get('/hello',function(req,res){
-  res.send('Hello')
-})
+
 app.get('/callback', function(req, res) {
 
   // your application requests refresh and access tokens
