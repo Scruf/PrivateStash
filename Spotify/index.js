@@ -121,7 +121,10 @@ SpotifyRouter.route('/callback')
 									throw error
 								else{
 									const tracks = body.items
-									console.log(tracks)
+									tracks.filter((item)=>{
+										console.log(item.track.album)
+
+									})
 								}
 							})
 							
