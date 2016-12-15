@@ -100,9 +100,9 @@ SpotifyRouter.route('/callback')
 						if(error)
 							throw error;
 						else{
-						
-							const playlist_id = body.items[0].id
-							const uri = `https://api.spotify.com/v1/users/${id}/playlists/${playlist_id}`
+							
+
+							const uri = body.items[0].tracks.href
 							let playlist = {
 								uri:uri,
 								form:{
@@ -115,7 +115,15 @@ SpotifyRouter.route('/callback')
 								},
 								json: true
 							}
-							console.log(playlist)
+							
+							request.get(playlist,(error,reponse,body)=>{
+								if(error)
+									throw error
+								else{
+									const tracks = body.items
+									console.log(tracks)
+								}
+							})
 							
 						}
 					})
