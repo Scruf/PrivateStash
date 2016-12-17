@@ -20,7 +20,7 @@ app.use(body_parser.json({type:'application/vdn.api+json'}))
 app.use(method_override('X-HTTP-Method-Override'))
 app.use(cookie_parser())
 
-SpotifyRouter.route('/')
+SpotifyRouter.route('/login')
 .get((req,res,next)=>{
 	const state =  Helpers.random_string()
 	
@@ -40,7 +40,7 @@ SpotifyRouter.route('/')
 
 })
 
-app.use('/',SpotifyRouter)
+app.use('/login',SpotifyRouter)
 
 SpotifyRouter.route('/callback')
 .get((req,res,next)=>{
@@ -142,11 +142,7 @@ SpotifyRouter.route('/callback')
 		})
 	}
 })
-SpotifyRouter.route('/hello')
-.get((req,res,next)=>{
-	res.send('Authorized')
-})
-app.use('/hello',SpotifyRouter)
+
 app.use('/callback',SpotifyRouter)
 
 
