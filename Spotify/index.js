@@ -120,11 +120,17 @@ SpotifyRouter.route('/callback')
 								if(error)
 									throw error
 								else{
+									let playlist_list = []
 									const tracks = body.items
 									tracks.filter((item)=>{
-										console.log(item.track.album)
+										let palylist_obj = {
+											"song_name":item.track.album.name,
+											"artist":item.track.album.artists[0].name
+										}
+										playlist_list.push(palylist_obj)
 
 									})
+									res.json(playlist_list)
 								}
 							})
 							
