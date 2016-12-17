@@ -102,36 +102,40 @@ SpotifyRouter.route('/callback')
 						else{
 							
 
-							const uri = body.items[0].tracks.href
-							let playlist = {
-								uri:uri,
-								form:{
-									code:code,
-									redirect_uri:'http://localhost:8000/callback',
-									grant_type:'authorization_code'
-								},
-								headers:{
-									'Authorization':'Bearer '+access_token
-								},
-								json: true
-							}
 							
-							request.get(playlist,(error,reponse,body)=>{
-								if(error)
-									throw error
-								else{
-									let playlist_list = []
-									const tracks = body.items
-									tracks.filter((item)=>{
-										let palylist_obj = {
-											"song_name":item.track.album.name,
-											"artist":item.track.album.artists[0].name
-										}
-										playlist_list.push(palylist_obj)
-
-									})
-									res.json(playlist_list)
+							body.items.filter((elem)=>{
+								const uri = elem.href
+								let playlist = {
+									uri:uri,
+									form:{
+										code:code,
+										redirect_uri:'http://localhost:8000/callback',
+										grant_type:'authorization_code'
+									},
+									headers:{
+										'Authorization':'Bearer '+access_token
+									},
+									json: true
 								}
+								
+								request.get(playlist,(error,reponse,body)=>{
+									if(error)
+										throw error
+									else{
+										let playlist_list = []
+										const tracks = body.items
+										tracks.filter((item)=>{
+											let palylist_obj = {
+												"song_name":item.track.album.name,
+												"artist":item.track.album.artists[0].name
+											}
+											playlist_list.push(palylist_obj)
+
+										})
+										res.json(playlist_list)
+									}
+								})
+								
 							})
 							
 						}
