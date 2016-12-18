@@ -20,7 +20,7 @@ app.use(body_parser.json({type:'application/vdn.api+json'}))
 app.use(method_override('X-HTTP-Method-Override'))
 app.use(cookie_parser())
 
-SpotifyRouter.route('/login')
+SpotifyRouter.route('/')
 .get((req,res,next)=>{
 	const state =  Helpers.random_string()
 	
@@ -40,7 +40,7 @@ SpotifyRouter.route('/login')
 
 })
 
-app.use('/login',SpotifyRouter)
+
 
 SpotifyRouter.route('/callback')
 .get((req,res,next)=>{
@@ -105,6 +105,7 @@ SpotifyRouter.route('/callback')
 							
 							body.items.filter((elem)=>{
 								const uri = elem.href
+								
 								let playlist = {
 									uri:uri,
 									form:{
@@ -117,22 +118,29 @@ SpotifyRouter.route('/callback')
 									},
 									json: true
 								}
-								
+
 								request.get(playlist,(error,reponse,body)=>{
 									if(error)
 										throw error
 									else{
-										let playlist_list = []
-										const tracks = body.items
-										tracks.filter((item)=>{
-											let palylist_obj = {
-												"song_name":item.track.album.name,
-												"artist":item.track.album.artists[0].name
-											}
-											playlist_list.push(palylist_obj)
-
+										console.log(body.tracks)
+										body.tracks.items.filter((item)=>{
+											console.log(item)
 										})
-										res.json(playlist_list)
+										// console.log(body)
+										// let playlist_list = []
+										// const tracks = body.items
+
+										// tracks.filter((item)=>{
+										// 	let palylist_obj = {
+										// 		"song_name":item.track.album.name,
+										// 		"artist":item.track.album.artists[0].name
+										// 	}
+										// 	playlist_list.push(palylist_obj)
+
+										// })
+										// console.log(playlist_list)
+										// console.log("------------------------------------------")
 									}
 								})
 								
@@ -147,7 +155,7 @@ SpotifyRouter.route('/callback')
 	}
 })
 
+app.use('/',SpotifyRouter)
 app.use('/callback',SpotifyRouter)
-
 
 app.listen(8000)
