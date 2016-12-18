@@ -103,6 +103,7 @@ SpotifyRouter.route('/callback')
 							
 
 							
+							let playlist_list = []
 							body.items.filter((elem)=>{
 								const uri = elem.href
 								
@@ -123,10 +124,16 @@ SpotifyRouter.route('/callback')
 									if(error)
 										throw error
 									else{
-										console.log(body.tracks)
+										
 										body.tracks.items.filter((item)=>{
-											console.log(item)
+											let playlist_obj = {
+												'name':item.track.album.name,
+												'artist':item.track.album.artists[0].name
+											}
+											playlist_list.push(playlist_obj)
+											
 										})
+
 										// console.log(body)
 										// let playlist_list = []
 										// const tracks = body.items
@@ -142,6 +149,7 @@ SpotifyRouter.route('/callback')
 										// console.log(playlist_list)
 										// console.log("------------------------------------------")
 									}
+									res.json(playlist_list)
 								})
 								
 							})
