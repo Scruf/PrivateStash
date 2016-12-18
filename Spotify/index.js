@@ -124,15 +124,28 @@ SpotifyRouter.route('/callback')
 									if(error)
 										throw error
 									else{
-										
+										let image = ''
+										if (typeof body.images[0] === 'undefined')
+											image = 'Empty'
+										else
+											image = body.images[0].url
+										let playlist_obj = {
+											'playlis_name':body.name,
+											'image':image,
+											'description':body.description
+										}
+										let tracks = []								
 										body.tracks.items.filter((item)=>{
-											let playlist_obj = {
+											let playlist_songs = {
 												'name':item.track.album.name,
 												'artist':item.track.album.artists[0].name
 											}
-											playlist_list.push(playlist_obj)
+											tracks.push(playlist_songs)
 											
 										})
+										playlist_obj['tracks'] = tracks
+										playlist_list.push(playlist_obj)
+
 
 										// console.log(body)
 										// let playlist_list = []
@@ -149,7 +162,9 @@ SpotifyRouter.route('/callback')
 										// console.log(playlist_list)
 										// console.log("------------------------------------------")
 									}
+									
 									res.json(playlist_list)
+									next()
 								})
 								
 							})
