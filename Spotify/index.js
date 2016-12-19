@@ -27,7 +27,7 @@ SpotifyRouter.route('/')
 	res.cookie(state,state_key)
 	const scope ='user-read-private user-read-email'
 	
-	res.redirect('https://accounts.spotify.com/authorize?'+
+	return res.redirect('https://accounts.spotify.com/authorize?'+
 		querystring.stringify({
 			response_type:'code',
 			client_id:SpotifyCredentials.SpotifyClientId,
@@ -36,12 +36,12 @@ SpotifyRouter.route('/')
 			state:state
 		})
 	)
-
-
+	next()
 })
 
 
 
+let playlist_list = []
 SpotifyRouter.route('/callback')
 .get((req,res,next)=>{
 	
@@ -69,9 +69,10 @@ SpotifyRouter.route('/callback')
 			json: true
 		};
 		
-		request.post(authOptions, (error,reponse,body)=>{
+		request.post(authOptions, (error,response,body)=>{
 			if (error)
-				throw error;
+				response.send("Error When Authentivation "+error)
+
 			else{
 				const access_token = body.access_token,
 					  refresh_token = body.refresh_token;
@@ -81,9 +82,13 @@ SpotifyRouter.route('/callback')
 					headers:{'Authorization':'Bearer '+access_token},
 					json:true
 				}
+
+				
+
 				request.get(options,(error,reponse,body)=>{
 					const id = body.id
-					
+					if (error)
+						res.send("Error after authentication "+ error)
 					let current_playlist = {
 						uri:`https://api.spotify.com/v1/users/${id}/playlists`,
 						form:{
@@ -98,12 +103,15 @@ SpotifyRouter.route('/callback')
 					}
 					request.get(current_playlist,(error,reponse,body)=>{
 						if(error)
-							throw error;
+							res.send("Error when retrieving all playlists")
 						else{
 							
 
-							
-							let playlist_list = []
+							if(typeof body.items === 'undefined'){
+								res.status(404)
+								res.send("Emtpy response")
+								
+							}
 							body.items.filter((elem)=>{
 								const uri = elem.href
 								
@@ -122,7 +130,7 @@ SpotifyRouter.route('/callback')
 
 								request.get(playlist,(error,reponse,body)=>{
 									if(error)
-										throw error
+										res.send("Error when retrieveing playlist" +error)
 									else{
 										let image = ''
 										if (typeof body.images[0] === 'undefined')
@@ -140,32 +148,22 @@ SpotifyRouter.route('/callback')
 												'name':item.track.album.name,
 												'artist':item.track.album.artists[0].name
 											}
+											
 											tracks.push(playlist_songs)
 											
 										})
+
 										playlist_obj['tracks'] = tracks
 										playlist_list.push(playlist_obj)
+										
 
-
-										// console.log(body)
-										// let playlist_list = []
-										// const tracks = body.items
-
-										// tracks.filter((item)=>{
-										// 	let palylist_obj = {
-										// 		"song_name":item.track.album.name,
-										// 		"artist":item.track.album.artists[0].name
-										// 	}
-										// 	playlist_list.push(palylist_obj)
-
-										// })
-										// console.log(playlist_list)
-										// console.log("------------------------------------------")
 									}
+								
 									
-									res.json(playlist_list)
-									next()
 								})
+							
+								res.send(playlist_list)
+															
 								
 							})
 							
