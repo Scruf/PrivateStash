@@ -36,7 +36,8 @@ SpotifyRouter.route('/')
 			state:state
 		})
 	)
-
+	next()
+	res.end()
 
 })
 
@@ -81,6 +82,7 @@ SpotifyRouter.route('/callback')
 					headers:{'Authorization':'Bearer '+access_token},
 					json:true
 				}
+				next()
 				request.get(options,(error,reponse,body)=>{
 					const id = body.id
 					
@@ -96,6 +98,7 @@ SpotifyRouter.route('/callback')
 						},
 						json: true
 					}
+					next()
 					request.get(current_playlist,(error,reponse,body)=>{
 						if(error)
 							throw error;
@@ -119,7 +122,7 @@ SpotifyRouter.route('/callback')
 									},
 									json: true
 								}
-
+								next()
 								request.get(playlist,(error,reponse,body)=>{
 									if(error)
 										throw error
@@ -164,7 +167,7 @@ SpotifyRouter.route('/callback')
 									}
 									
 									res.json(playlist_list)
-									next()
+									
 								})
 								
 							})
