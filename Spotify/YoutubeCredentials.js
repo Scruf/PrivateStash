@@ -1,3 +1,3 @@
 const Youtube = module.exports = {
-	'YoutubeApiKey':'AIzaSyAhW_KXN86P6cTsP_uOEoQqefG4VVRoSjE'
+	'YoutubeApiKey':'AIzaSyCKUc02clfVh601-ZnNaLDmVh4LY-fP_x4'
 }

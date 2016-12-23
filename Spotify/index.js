@@ -1,6 +1,7 @@
 "use strict"
 const request = require('request')
 const SpotifyCredentials = require('./SpotifyCredentials')
+const Youtube = require('./YoutubeCredentials')
 const express = require('express')
 const app = express()
 const body_parser = require('body-parser')
@@ -36,12 +37,10 @@ SpotifyRouter.route('/')
 			state:state
 		})
 	)
-	next()
-<<<<<<< HEAD
+
 	res.end()
 
-=======
->>>>>>> f65ef55a9490194cc67c6bfaa1a6c6b8616fccfa
+
 })
 
 
@@ -87,13 +86,7 @@ SpotifyRouter.route('/callback')
 					headers:{'Authorization':'Bearer '+access_token},
 					json:true
 				}
-<<<<<<< HEAD
-				next()
-=======
 
-				
-
->>>>>>> f65ef55a9490194cc67c6bfaa1a6c6b8616fccfa
 				request.get(options,(error,reponse,body)=>{
 					const id = body.id
 					if (error)
@@ -168,13 +161,6 @@ SpotifyRouter.route('/callback')
 										
 
 									}
-								
-									
-<<<<<<< HEAD
-									res.json(playlist_list)
-									
-=======
->>>>>>> f65ef55a9490194cc67c6bfaa1a6c6b8616fccfa
 								})
 							
 								res.send(playlist_list)
@@ -194,4 +180,4 @@ SpotifyRouter.route('/callback')
 app.use('/',SpotifyRouter)
 app.use('/callback',SpotifyRouter)
 
-app.listen(8000)
+app.listen(3000)
