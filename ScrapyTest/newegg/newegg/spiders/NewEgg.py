@@ -1,5 +1,6 @@
 from newegg.items import NeweggItem
 from scrapy.spiders import CrawlSpider
+import scrapy
 import re
 #//*[@id="search-results"]/div[2]/table
 class NewEgg(CrawlSpider):
@@ -13,16 +14,37 @@ class NewEgg(CrawlSpider):
 		# selectors = response.css(".additional-sellers > ul > li")
 		# for selector in selectors:
 		# 	print(selector.css('.sellers-list-item::text').extract())
-		# print(response.css('div.additional-sellers > ul.sellers-list > li.sellers-list-item > div > div.item-seller > a::attr(href)').extract())
-		# print(response.css('div.additional-s>ellers > ul.sellers-list > li.sellers-list-item > div > div.item-seller > a::text').extract())
-		for i,selector in enumerate(response.css('div.additional-sellers > ul.sellers-list > li.sellers-list-item > div ')):
-			if i%2 == 0 or i == 0:
-				items.append(str(selector.css('div.has-form > form.askSellerClassForm>#itemNumber').extract_first().replace('"','')))
+		
+		# for selector in response.css('div.additional-sellers > ul.sellers-list > li.sellers-list-item > div > div.item-seller '):
+		# 	if len(selector.css('a::attr(href)').extract()) != 0:
+		# 		company_review_url ='http://' +str(selector.css('a::attr(href)').extract()[4].replace("//",""))
+		# 		yield scrapy.Request(company_review_url,callback=self.review)
+
+
+		for i,selector in enumerate(response.css('div.additional-sellers > ul.sellers-list > li.sellers-list-item > div div.has-form > form.askSellerClassForm')):
+			items.append(str(selector.css('#itemNumber').extract_first().replace('"','')))
+		
 		regex = r"(value=\S{14})"
 	
 		for item in items:
 			match = re.finditer(regex, item)
 			for m in match:
-				print(m.group().split("=")[1])
+				item_number = str(m.group().split("=")[1])
+				item_price_url = "http://www.newegg.com/Product/MappingPrice2012.aspx?Item=%s"%(item_number)
+				yield scrapy.Request(item_price_url,callback=self.parse_price)
 
-	
+
+	def parse_review(self,response):
+		print(response.css('div.reviewSummaryTitle>span>span::attr(title)').extract_first())
+		yield scrapy.Request(self.start_urls[0],self.parse)
+
+	def parse_price(self,response):
+		first = response.css('li.price-current > strong ::text').extract_first()
+		second =  response.css('li.price-current > sup ::text').extract_first()
+		print(second)
+
+
+
+
+		#mappingPrice > div.section > div > div > div.detail > div > ul > li.price-current > strong
+#mappingPrice > div.section > div > div > div.detail > div > ul > li.price-current > sup
