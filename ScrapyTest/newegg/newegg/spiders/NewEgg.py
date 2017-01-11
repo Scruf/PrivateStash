@@ -21,27 +21,28 @@ class NewEgg(CrawlSpider):
 		# 		yield scrapy.Request(company_review_url,callback=self.review)
 
 
+		print(response.body)
 		for i,selector in enumerate(response.css('div.additional-sellers > ul.sellers-list > li.sellers-list-item > div div.has-form > form.askSellerClassForm')):
+			
 			items.append(str(selector.css('#itemNumber').extract_first().replace('"','')))
-		
 		regex = r"(value=\S{14})"
-	
+		
 		for item in items:
 			match = re.finditer(regex, item)
 			for m in match:
 				item_number = str(m.group().split("=")[1])
 				item_price_url = "http://www.newegg.com/Product/MappingPrice2012.aspx?Item=%s"%(item_number)
-				yield scrapy.Request(item_price_url,callback=self.parse_price)
+				print(item_number)
 
 
 	def parse_review(self,response):
 		print(response.css('div.reviewSummaryTitle>span>span::attr(title)').extract_first())
-		yield scrapy.Request(self.start_urls[0],self.parse)
+		# yield scrapy.Request(self.start_urls[0],self.parse)
 
 	def parse_price(self,response):
 		first = response.css('li.price-current > strong ::text').extract_first()
 		second =  response.css('li.price-current > sup ::text').extract_first()
-		print(second)
+		# print(second)
 
 
 

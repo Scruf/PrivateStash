@@ -1,0 +1,23 @@
+{
+  "name": "amazon_signature_validation",
+  "version": "0.0.1",
+  "description": "Test script to verify Amazon MD5 signature",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Amazon",
+    "MD5",
+    "Hate",
+    "Signature",
+    "validation",
+    "Terrible",
+    "XML"
+  ],
+  "author": "Egor Kozitski",
+  "license": "MIT",
+  "dependencies": {
+    "crypto": "0.0.3"
+  }
+}
