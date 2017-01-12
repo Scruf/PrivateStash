@@ -1,0 +1,15 @@
+{
+  "name": "test",
+  "private": true,
+  "scripts": {
+    "start": "meteor run",
+    "desktop": "meteor-desktop"
+  },
+  "dependencies": {
+    "meteor-node-stubs": "~0.2.0",
+    "babel-runtime": "6.18.0"
+  },
+  "devDependencies": {
+    "meteor-desktop": "^0.4.0"
+  }
+}
