@@ -30,6 +30,7 @@ class Amazon(CrawlSpider):
 		feed_back_summary = response.css('#seller-feedback-summary > span > a > b ::text').extract_first()
 		cell_phone_number = response.css('#seller-contact-phone ::text').extract_first()
 		ratings = response.css('#seller-feedback-summary > span > a ::text').extract()
+		name = response.css('#storefront-link > a ::text').extract_first()
 		if len(ratings)>0:
 			ratings = ratings[1]
 		else:
@@ -40,6 +41,7 @@ class Amazon(CrawlSpider):
 					 meta = {'feed_back_summary':feed_back_summary,
 					 		 'cell_phone_number':cell_phone_number,
 					 		 'ratings':ratings,
+					 		 'name':name,
 					 		 'seller':response.meta['seller']})
 
 	def parses_number_of_items(self,response):
@@ -52,30 +54,30 @@ class Amazon(CrawlSpider):
 		except AttributeError as ae:
 			return None
 		response.meta.update({'number_of_items':number_of_items})
-	
+		response.meta.update({"Brand":[]})
+		
 		yield Request('https://www.amazon.com/Certified-Refurbished/s?ie=UTF8&me=%s&page=1&rh=i%%3Amerchant-items%%2Ck%%3A%%22Certified%%20Refurbished%%22'%response.meta['seller'],
 						callback=self.parse_certified_refurbished,
 						meta=response.meta
 					)
 
 	def parse_certified_refurbished(self,response):
-		# print("---------------------------------------------------")
-		# print(len(response.css('#s-result-count')))
-		# print("---------------------------------------------------")
+	
 		if len((response.css('#s-result-count'))) == 0:
-			number_of_refurbished = certified_refurbished = response.css('#s-results-list-atf > li')
+			number_of_refurbished  = len(response.css('#s-results-list-atf > li'))
 			response.meta.update({"number_of_refurbished":number_of_refurbished})
-			response.meta.update({"Brand":[]})
+			
 			for brand in self.number_of_brands:
 				response.meta.update({'brand':brand})	
 				url = 'https://www.amazon.com/s/ref=nb_sb_noss?url=me%%3D%s&field-keywords=%s+-refurbished'%(response.meta['seller'],brand)
-				
 				yield Request(url,
 					callback=self.parse_not_refurbished_brand,
 					meta=response.meta)
+			
+			
 		else:
 			return None
-		yield response.meta
+		
 
 
 	def parse_not_refurbished_brand(self,response):
@@ -83,13 +85,14 @@ class Amazon(CrawlSpider):
 			not_refurbished = response.css('#s-result-count ::text').extract_first().split(' ')[0]
 			if '-' in not_refurbished:
 				not_refurbished = not_refurbished.split("-")[1]
-			print("------------------------------------------------------")
-			print(response.meta.get('Brand'))
-			print("------------------------------------------------------")
-			refurbished_url = 'https://www.amazon.com/s/ref=nb_sb_noss?url=me%%3D%s&field-keywords=%s-refurbished'%(response.meta['seller'],response.meta['brand'])
-
 			response.meta.get('Brand').append({'brand_name':response.meta['brand'],'condition':'New','count':not_refurbished})
-
+			
+			refurbished_url = 'https://www.amazon.com/s/ref=nb_sb_noss?url=me%%3D%s&field-keywords=%s-refurbished'%(response.meta['seller'],response.meta['brand'])
+			brand_list = response.meta.get('Brand')
+			brand_list.append({'brand_name':response.meta['brand'],'condition':'New','count':not_refurbished})
+			
+			# response.meta.get('Brand').append({'brand_name':response.meta['brand'],'condition':'New','count':not_refurbished})
+			# response.meta.update({'Brand':response.meta.get('Brand').append({'brand_name':response.meta['brand'],'condition':'New','count':not_refurbished})})
 			yield Request(refurbished_url,
 						  callback=self.parse_refurbished_brand,
 						  meta=response.meta)
@@ -106,23 +109,20 @@ class Amazon(CrawlSpider):
 			refurbished = response.css('#s-result-count ::text').extract_first().split(' ')[0]
 			if '-' in refurbished:
 				refurbished = refurbished.split("-")[1]
-			print("------------------------------------------------------")
-			print(response.meta.get('Brand'))
-			print("------------------------------------------------------")
-			refurbished_url = 'https://www.amazon.com/s/ref=nb_sb_noss?url=me%%3D%s&field-keywords=%s+-refurbished'%(response.meta['seller'],response.meta['brand'])
+			not_brand = response.meta.get('Brand')
 			response.meta.get('Brand').append({'brand_name':response.meta['brand'],'condition':'Refurbished','count':refurbished})
 			
-			yield Request('https://www.amazon.com/Certified-Refurbished/s?ie=UTF8&me=%s&page=1&rh=i%%3Amerchant-items%%2Ck%%3A%%22Certified%%20Refurbished%%22'%response.meta['seller'],
-						callback=self.parse_certified_refurbished,
-						meta=response.meta)
+		
+			# not_brand.append({'brand_name':response.meta['brand'],'condition':'Refurbished','count':not_refurbished})
+			refurbished_url = 'https://www.amazon.com/s/ref=nb_sb_noss?url=me%%3D%s&field-keywords=%s+-refurbished'%(response.meta['seller'],response.meta['brand'])
+			response.meta.pop('brand')
+			
+			yield response.meta
 		except AttributeError as ai:
 		
 			refurbished_url = 'https://www.amazon.com/s/ref=nb_sb_noss?url=me%%3D%s&field-keywords=%s-refurbished'%(response.meta['seller'],response.meta['brand'])
-		
+			response.meta.pop('brand')
 
-			yield Request('https://www.amazon.com/Certified-Refurbished/s?ie=UTF8&me=%s&page=1&rh=i%%3Amerchant-items%%2Ck%%3A%%22Certified%%20Refurbished%%22'%response.meta['seller'],
-						callback=self.parse_certified_refurbished,
-						meta=response.meta)
-	
+			yield response.meta
 
 # #https://www.amazon.com/Certified-Refurbished/s?ie=UTF8&me=%s&page=1&rh=i%3Amerchant-items%2Ck%3A%22Certified%20Refurbished%22
