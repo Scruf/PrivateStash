@@ -1,0 +1,14 @@
+setup.py
+Amazon/__init__.py
+Amazon/items.py
+Amazon/middlewares.py
+Amazon/pipelines.py
+Amazon/settings.py
+Amazon/test.py
+Amazon/spiders/Amazon.py
+Amazon/spiders/__init__.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
