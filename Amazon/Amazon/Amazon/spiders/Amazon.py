@@ -83,12 +83,15 @@ class Amazon(CrawlSpider):
 			if response.meta['ratings']!='0':
 				response.meta['ratings'] = str(response.meta['ratings'].split('(')[1].split(' ')[0])
 
+			if response.meta['cell_phone_number'] is None or len(response.meta['cell_phone_number']) == 0:
+				response.meta['cell_phone_number'] = ' '
+
 			response.meta['number_of_items'] = response.meta['number_of_items'].replace(',','')
 		
 
-			query = """SELECT usp_add_amazonseller('{}','{}','{}','{}','{}','{}');""".format(
+			query = """SELECT usp_add_amazonseller('{}','{}','{}','{}','{}','{}','{}');""".format(
 				response.meta['name'],response.meta['seller'],response.meta['feed_back_summary'],
-				response.meta['ratings'],response.meta['number_of_items'],False
+				response.meta['ratings'],response.meta['number_of_items'],False,response.meta['cell_phone_number']
 			)
 			self.PGSQL_CUR.execute(query)
 			self.PGSQL_CONN.commit()
@@ -112,11 +115,13 @@ class Amazon(CrawlSpider):
 				response.meta['ratings'] = str(response.meta['ratings'].split('(')[1].split(' ')[0])
 
 			response.meta['number_of_items'] = response.meta['number_of_items'].replace(',','')
-		
+			
+			if response.meta['cell_phone_number'] is None or len(response.meta['cell_phone_number']) == 0:
+				response.meta['cell_phone_number'] = ' '
 
-			query = """SELECT usp_add_amazonseller('{}','{}','{}','{}','{}','{}');""".format(
+			query = """SELECT usp_add_amazonseller('{}','{}','{}','{}','{}','{}','{}');""".format(
 				response.meta['name'],response.meta['seller'],response.meta['feed_back_summary'],
-				response.meta['ratings'],response.meta['number_of_items'],True
+				response.meta['ratings'],response.meta['number_of_items'],True,response.meta['cell_phone_number']
 			)
 			self.PGSQL_CUR.execute(query)
 			self.PGSQL_CONN.commit()
