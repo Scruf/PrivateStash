@@ -1,0 +1,17 @@
+<html>
+  <title>Login Page</title>
+  <head>
+  </head>
+  <body>
+      <form method="post">
+          {%csrf_token%}
+          {{form.as_p}}
+          <button type="submit">Login</button>
+      </form>
+      <br/>
+      <p>
+          <strong> Or Login With </strong>
+            <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+            <a href="{% url 'social:begin' 'twitter' %}">Login with twitter</a><br>
+  </body>
+</html
